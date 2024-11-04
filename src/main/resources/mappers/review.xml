@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.mvc.model.dao.ReviewDao">
+	
+	<select id="selectAllByVideoId" parameterType="int" resultType="review">
+		select * from review
+		where video_id = #{videoId}
+	</select>
+	
+	<insert id="insertReview" parameterType="review">
+		insert into review(video_id, title, content, author, view_count, created_time)
+		values(#{videoId}, #{title}, #{content}, #{author}, 0, now())
+	</insert>
+	
+	<update id="updateReview" parameterType="review">
+		update review
+		set title = #{title}, content = #{content}
+		where id = #{id}
+	</update>
+	
+	<select id="selectOneByReviewId" parameterType="int" resultType="review">
+		select title, content, author, view_count, created_time
+		from review
+		where id = #{id}
+	</select>
+	
+	<update id="updateViewCount" parameterType="int">
+		update review
+		set view_count = view_count + 1
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from review
+		where id = #{id}
+	</delete>
+
+</mapper>
