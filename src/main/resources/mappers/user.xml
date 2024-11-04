@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.mvc.model.dao.UserDao">
+	
+	<insert id="insertUser" parameterType="user">
+		insert into user(user_id, password, user_name, is_admin)
+		values(#{userId}, #{password}, #{userName}, #{isAdmin})
+	</insert>
+	
+	<select id="selectOneByUserId" parameterType="String" resultType="user">
+		select * from user
+		where user_id = #{id}
+	</select>
+	
+	<insert id="insertStatus" parameterType="user">
+		insert into status(user_id, user_name, is_admin)
+		values(#{userId}, #{userName}, #{isAdmin})
+	</insert>
+	
+	<select id="selectUserIdFromStatus" resultType="string">
+		select user_id from status;
+	</select>
+	
+	<delete id="deleteUserStatus">
+		delete from status;
+	</delete>
+
+</mapper>
